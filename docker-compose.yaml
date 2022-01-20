@@ -22,8 +22,6 @@ services:
     tty: true
     ports:
       - 8000:8000
-    volumes:
-      - C:/Users/Vinicius/Desktop/caixa-eletronico/src/src:/app
     networks:
       - caixa_eletronico
 networks:
