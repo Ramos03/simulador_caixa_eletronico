@@ -80,6 +80,11 @@ Ao se autenticar, será gerado um JWT, será necessário repassar esse token no 
 }
 ```
 
+### Exemplo de consumo da Endpoint /api/transacao/extrato (GET) (Extrato)
+```bash
+	http://127.0.0.1:8000/api/transacao/extrato?conta=1
+```
+
 ### 🎲 Rodando a aplicação
 
 O sistema está configurado com o docker-compose, assim que executar iniciará a aplicação e o banco (MariaDB).

@@ -1,0 +1,31 @@
+version: "3.8"
+services:
+  db:
+    image: mariadb
+    container_name: db_caixa
+    restart: always
+    tty: true
+    environment:
+      - MYSQL_USER=appCaixa
+      - MYSQL_PASSWORD=1234
+      - MYSQL_DATABASE=db
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_VERSION=5.7
+    networks:
+      - caixa_eletronico
+  api:
+    build:
+      context: ./
+    container_name: app_caixa
+    depends_on:
+      - db 
+    tty: true
+    ports:
+      - 8000:8000
+    volumes:
+      - C:/Users/Vinicius/Desktop/caixa-eletronico/src/src:/app
+    networks:
+      - caixa_eletronico
+networks:
+  caixa_eletronico:
+    driver: bridge

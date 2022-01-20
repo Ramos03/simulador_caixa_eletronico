@@ -28,7 +28,10 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         
-        $credentials = $request->only('us_cpf', 'password');
+        $credentials = [
+            'us_cpf' => $request->input('cpf'),
+            'password' => $request->input('password')
+        ];
 
         if ($token = $this->guard()->attempt($credentials)) {
             return $this->respondWithToken($token);

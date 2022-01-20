@@ -56,6 +56,7 @@ class TransacoesController extends Controller
         ];
 
         $saque = new Transacoes();
-        return response()->json($dados, 200);
+        $retorno = $saque->extrato($dados);
+        return response()->json($retorno->original, 200);
     }
 }

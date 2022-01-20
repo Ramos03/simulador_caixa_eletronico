@@ -125,7 +125,7 @@ class User extends Authenticatable implements JWTSubject
 
             return (object)["id" => 1, "mensagem" => "Usuário criado com sucesso", "status" => 201];
         } catch (Exception $e) {
-            throw new Error("Erro ao criar usuario");
+            throw new Error("Erro ao criar usuario" . $e);
         }
     }
 
@@ -209,18 +209,34 @@ class User extends Authenticatable implements JWTSubject
      */
     public function deleteUsuario($id)
     {
-
         try {
+
+            $validaSaldo = DB::table('contas')
+                ->where('co_id_usuario', $id)
+                ->where('co_saldo', ">", 0)
+                ->get();
+                
+            if ($validaSaldo) {
+                return response()->json(['mensagem' => "Necessário realizar o saque de todo saldo para efetuar o cancelamento"]);
+            }
+
             $user = DB::table('users')
                 ->where('id', $id)
                 ->update([
-                    'us_status' => 'N'
+                    'us_status' => 'N',
                 ]);
 
-            if (!$user) {
+            $conta = DB::table('contas')
+                ->where('co_id_usuario', $id)
+                ->update([
+                    'co_status' => 'N',
+                ]);
+
+
+            if (!$user && !$conta) {
                 return false;
             }
-            return response()->noContent();
+            return true;
         } catch (Exception $e) {
             throw new Error("Erro ao apagar usuário");
         }

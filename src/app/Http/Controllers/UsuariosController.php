@@ -92,8 +92,9 @@ class UsuariosController extends Controller
         if (!$retUsuarios) {
             return response()->json(['mensagem' => "Usuário não localizado"], 404);
         }
+
         JWTAuth::invalidate(JWTAuth::getToken());
 
-        return response()->json($retUsuarios, 200);
+        return response()->noContent();
     }
 }
