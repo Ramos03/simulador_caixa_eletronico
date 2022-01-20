@@ -80,6 +80,8 @@ Ao se autenticar, será gerado um JWT, será necessário repassar esse token no 
 }
 ```
 
+Na pasta raiz possui um arquivo Caixa_eletronico.json, collection do insomnia. 
+
 ### Exemplo de consumo da Endpoint /api/transacao/extrato (GET) (Extrato)
 ```bash
 	http://127.0.0.1:8000/api/transacao/extrato?conta=1
