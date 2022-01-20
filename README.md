@@ -94,7 +94,7 @@ O sistema está configurado com o docker-compose, assim que executar iniciará a
 $ git clone https://github.com/Ramos03/simulador_caixa_eletronico
 
 # Execução do docker compose
-$ docker-compose up
+$ docker-compose up --build
 
 # Para execução dos testes
 $ php artisan test
